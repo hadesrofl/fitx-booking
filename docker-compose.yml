@@ -4,6 +4,6 @@ services:
     environment:
       - FITX_USERNAME=${FITX_USERNAME}
       - FITX_PASSWORD=${FITX_PASSWORD}
-      - FITX_STUDIO_ID=${FITX_STUDIO_ID:-1293643060}
+      - FITX_STUDIO_ID=${FITX_STUDIO_ID}
       - FITX_COURSE_NAME=${FITX_COURSE_NAME:-functional x}
       - RUN_TEST=${RUN_TEST:-false}

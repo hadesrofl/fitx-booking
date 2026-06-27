@@ -35,7 +35,12 @@ class FitXRepository:
     def authenticate(
         self, username: str, password: str
     ) -> Optional[requests.Session]:
-        """Loggt sich mit Basic Auth + JSON Payload ein."""
+        """Loggt sich mit Basic Auth + JSON Payload ein.
+        
+        Hinweis: Authentifizierung wird bereits in config.py validiert
+        (FITX_USERNAME/FITX_PASSWORD müssen als Environment-Variablen gesetzt sein).
+        Diese Prüfung dient nur als defensive Layer für direkte Aufrufe von außen.
+        """
         if not username or not password:
             print("❌ Fehler: FITX_USERNAME oder FITX_PASSWORD ist nicht gesetzt!")
             return None
@@ -63,7 +68,7 @@ class FitXRepository:
         self,
         target_date: datetime,
         target_time: str,
-        studio_id: str = "1293643060",
+        studio_id: str,
         course_name: str = "functional x",
     ) -> Optional[int]:
         """Sucht die Kurs-ID im Kursplan des jeweiligen Tages."""
