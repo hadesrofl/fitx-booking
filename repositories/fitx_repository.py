@@ -109,7 +109,7 @@ class FitXRepository:
         }
 
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Starte Buchungs-Request für ID {course_id}...")
-        for attempt in range(1, 6):
+        for attempt in range(1, 12):
             try:
                 response = self.session.post(self.BOOKING_URL, json=payload, timeout=5)
 
