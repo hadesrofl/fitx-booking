@@ -1,5 +1,7 @@
 import os
 import sys
+from ScheduleLoader import load_schedule_map
+
 
 RUN_TEST = os.environ.get("RUN_TEST", "false").lower() == "true"
 
@@ -24,3 +26,5 @@ if _missing:
     sys.exit(1)
 
 COURSE_NAME = os.environ.get("FITX_COURSE_NAME", "functional x")
+FITX_SCHEDULE_FILE = os.environ.get("FITX_SCHEDULE_FILE", "").strip()
+SCHEDULE_MAP = load_schedule_map(FITX_SCHEDULE_FILE)
