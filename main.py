@@ -28,6 +28,12 @@ def _schedule_entries_for_today(now: datetime) -> list[ScheduleEntry]:
         if booking_window[DAY_KEY] != now_weekday:
             continue
         due.append(entry)
+    if len(due) == 0 and len(SCHEDULE_MAP) > 0:
+        next_entry = sorted(SCHEDULE_MAP, key=lambda item: _to_minutes(item[BOOKABLE_FROM_KEY][TIME_KEY]))[0]
+        target_date = _resolve_target_date(datetime.now(), next_entry[DAY_KEY])
+        print(f"Nächster Eintrag im Booking-Schedule: {next_entry[NAME_KEY]}")
+        print(f"   Kurs-Tag: {next_entry[DAY_KEY]} | Kurs-Zeit: {next_entry[TIME_KEY]}")
+        print(f"   Ziel-Datum: {target_date.strftime('%d.%m.%Y')}")
     return sorted(due, key=lambda item: _to_minutes(item[BOOKABLE_FROM_KEY][TIME_KEY]))
 
 
