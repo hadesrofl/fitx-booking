@@ -6,4 +6,7 @@ services:
       - FITX_PASSWORD=${FITX_PASSWORD}
       - FITX_STUDIO_ID=${FITX_STUDIO_ID}
       - FITX_COURSE_NAME=${FITX_COURSE_NAME:-functional x}
+      - FITX_SCHEDULE_FILE=${FITX_SCHEDULE_FILE:-/data/schedule.json}
       - RUN_TEST=${RUN_TEST:-false}
+    volumes:
+      - ./config/schedule.json:/data/schedule.json:ro

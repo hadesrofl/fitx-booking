@@ -84,10 +84,15 @@ class FitXRepository:
             if not isinstance(courses, list):
                 print("❌ Fehler: Kursplan-Antwort hat kein Listenformat.")
                 return None
-
+            
+            print(f"✅ Kursplan geladen! Gefundene Kurse: {len(courses)}")
+            
             for course in courses:
-                if course.get("name", "").lower() == course_name.lower():
+                course_name_value = course.get("name", "").lower()
+                print(f"🎯 Kurs '{course_name_value}' gefunden!")
+                if course_name_value == course_name.lower():
                     slots = course.get("slots", [])
+                    print(f"   Slots für '{course_name}': {slots[0].get('startDateTime', '') if slots else 'Keine Slots'}")
                     if slots and f"T{target_time}" in slots[0].get("startDateTime", ""):
                         course_id = course.get("id")
                         print(f"🎯 Kurs '{course_name}' gefunden! ID: {course_id}")
@@ -121,10 +126,10 @@ class FitXRepository:
                     return False
                 else:
                     print(f"⚠️ Versuch {attempt} fehlgeschlagen (Status {response.status_code})")
-                    time.sleep(0.3)
+                    time.sleep(1)
             except requests.exceptions.RequestException as e:
                 print(f"⚠️ Netzwerkfehler bei Versuch {attempt}: {e}")
-                time.sleep(0.3)
+                time.sleep(1)
 
         print("❌ Alle Buchungsversuche fehlgeschlagen.")
         return False
